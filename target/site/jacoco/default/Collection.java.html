@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Collection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">.com.hillel.HW_12</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Collection.java</span></div><h1>Collection.java</h1><pre class="source lang-java linenums">public class Collection implements CustomCollection {
+    private String[] arr;
+
+    private int capacity;
+<span class="fc" id="L5">    private int lenght = 0;</span>
+
+<span class="fc" id="L7">    Collection() {</span>
+<span class="fc" id="L8">        capacity = 20;</span>
+<span class="fc" id="L9">        arr = new String[capacity];</span>
+<span class="fc" id="L10">    }</span>
+
+<span class="fc" id="L12">    Collection(int capacity) {</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        if(capacity==0){</span>
+<span class="fc" id="L14">            System.out.print(&quot;must be at least 1 element!&quot;);</span>
+<span class="fc" id="L15">            this.capacity=1;</span>
+        }
+        else{
+<span class="fc" id="L18">            this.capacity = capacity;</span>
+        }
+<span class="fc" id="L20">        arr = new String[capacity];</span>
+<span class="fc" id="L21">    }</span>
+
+    public int size() {
+<span class="fc" id="L24">        int i = 0;</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        for (; i &lt; capacity; i++) {</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (arr[i] != null) {</span>
+                continue;
+            } else  break;
+
+
+        }
+<span class="fc" id="L32">        return i;</span>
+    }
+
+
+    public boolean add(String str) {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (lenght == capacity - 1) {</span>
+<span class="fc" id="L38">            capacity *= 2;</span>
+<span class="fc" id="L39">            String[] temp = new String[capacity];</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            for (int i = 0; i &lt; lenght; i++){</span>
+<span class="fc" id="L41">                temp[i] = arr[i];</span>
+            }
+
+<span class="fc" id="L44">            arr = temp;</span>
+        }
+
+<span class="fc" id="L47">        arr[lenght] = str;</span>
+<span class="fc" id="L48">        lenght++;</span>
+<span class="fc" id="L49">        return true;</span>
+    }
+
+    public boolean addByOne(String str) {
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (lenght == capacity - 1) {</span>
+<span class="fc" id="L54">            capacity += 1;</span>
+<span class="fc" id="L55">            String[] temp = new String[capacity];</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            for (int i = 0; i &lt; lenght; i++) {</span>
+<span class="fc" id="L57">                temp[i] = arr[i];</span>
+
+            }
+
+<span class="fc" id="L61">            arr = temp;</span>
+        }
+
+<span class="fc" id="L64">        arr[lenght] = str;</span>
+<span class="fc" id="L65">        lenght++;</span>
+<span class="fc" id="L66">        return true;</span>
+    }
+
+
+
+
+
+    public boolean delete(int index) {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (index &gt;= lenght) {</span>
+<span class="fc" id="L75">            return false;</span>
+        }
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (int i = index; i &lt; lenght - 1; i++) {</span>
+<span class="fc" id="L78">            arr[i] = arr[i + 1];</span>
+        }
+<span class="fc" id="L80">        arr[lenght - 1] = null;</span>
+<span class="fc" id="L81">        lenght--;</span>
+<span class="fc" id="L82">        return true;</span>
+    }
+
+
+    public boolean delete(String str) {
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (!this.contains(str)) {</span>
+<span class="fc" id="L88">            return false;</span>
+        }
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        for (int i = 0; i &lt; lenght; i++) {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (arr[i].equals(str)) {</span>
+<span class="fc" id="L93">                delete(i);</span>
+            }
+<span class="fc" id="L95">            arr[lenght - 1] = null;</span>
+<span class="fc" id="L96">            lenght--;</span>
+        }
+<span class="fc" id="L98">        return true;</span>
+
+
+    }
+
+
+    public String get(int index) {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (index &gt;= lenght) {</span>
+<span class="fc" id="L106">            return &quot;&quot;;</span>
+        }
+
+
+<span class="fc" id="L110">        return arr[index];</span>
+
+
+    }
+
+    public boolean contains(String str) {
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        for (int i = 0; i &lt; lenght; i++) {</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if (arr[i].equals(str)) {</span>
+<span class="fc" id="L118">                return true;</span>
+            }
+        }
+
+<span class="fc" id="L122">        return false;</span>
+
+    }
+
+
+    void display() {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        for (int i = 0; i &lt; lenght; i++) {</span>
+<span class="fc" id="L129">            System.out.print(arr[i] + &quot;, &quot;);</span>
+        }
+      //  System.out.println(&quot;&quot;);
+
+
+<span class="fc" id="L134">    }</span>
+
+    public boolean compare(Collection eColl) {
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if(this==eColl)return true;</span>
+
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if (this.size() != eColl.size()) return false;</span>
+
+
+
+<span class="fc bfc" id="L143" title="All 2 branches covered.">            for (int i = 0; i &lt; lenght; i++) {</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">                if (!this.get(i).equals(eColl.get(i))) {</span>
+<span class="fc" id="L145">                    return false;</span>
+                }
+            }
+<span class="fc" id="L148">            return true;</span>
+
+
+
+
+    }
+
+    public boolean clear() {
+<span class="fc bfc" id="L156" title="All 2 branches covered.">        for (int i = 0; i &lt;lenght; i++) {</span>
+<span class="fc" id="L157">            this.arr[i] = null;</span>
+
+        }
+<span class="fc" id="L160">        lenght=1;</span>
+<span class="fc" id="L161">        return true;</span>
+    }
+
+    int indexOf(String str) {
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        for (int i = 0; i &lt; lenght; i++) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (arr[i].equals(str)) {</span>
+<span class="fc" id="L167">                return i;</span>
+            }
+        }
+<span class="fc" id="L170">        System.out.println(&quot;no matches&quot;);</span>
+<span class="fc" id="L171">        return -1;</span>
+
+    }
+
+
+    public boolean addAll(String[] strArr) {
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        for (int i = 0; i &lt; strArr.length; i++) {</span>
+<span class="fc" id="L178">            this.add(strArr[i]);</span>
+        }
+<span class="fc" id="L180">        return true;</span>
+
+
+    }
+
+    public boolean addAll(Collection strColl) {
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        for (int i = 0; i &lt; strColl.size(); i++) {</span>
+<span class="fc" id="L187">            this.add(strColl.get(i));</span>
+        }
+<span class="fc" id="L189">        return true;</span>
+    }
+
+
+    public boolean trim() {
+
+<span class="fc" id="L195">        return false;</span>
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
